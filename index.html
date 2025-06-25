@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Expression Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Styling for the layout */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            width: 60%;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        video {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        .output {
+            margin-top: 10px;
+            font-size: 20px;
+            color: rgb(0, 0, 0);
+        }
+        .prediction-section {
+            margin-top: 20px;
+        }
+        .video-container {
+            position: relative;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #uploadForm {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Facial Expression Recognition</h1>
+    <div class="container">
+        <!-- Real-Time Detection Section -->
+        <div class="video-container">
+            <video id="video" width="480" height="360" autoplay></video>
+            <canvas id="overlay" width="480" height="360" style="display: none;"></canvas>
+            <button onclick="startDetection()">Start Real-Time Detection</button>
+        </div>
+
+        <!-- Image Upload Section -->
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="imageUpload" name="image" accept="image/*">
+            <button type="button" onclick="uploadImage()">Upload and Predict</button>
+        </form>
+
+        <!-- Prediction Output Sections -->
+        <div id="realTimeOutput" class="output prediction-section"></div>
+        <div id="uploadOutput" class="output prediction-section"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
